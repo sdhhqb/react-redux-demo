@@ -5,13 +5,15 @@ import { Link } from 'react-router';
 
 var MenuItem = React.createClass({
 	showRoute: function () {
-		var route = this.props.item.route;
-		location.hash = route;
+		// var route = this.props.item.route;
+		// location.hash = route;
 		// this.chgKey();
 	},
 	chgKey: function () {
+		console.log("set cur Active 001");
 		if (this.props.curPath != this.props.selfPath) {
-			this.props.setCurActive(this.props.selfPath, this.props.item.route);
+			console.log("set cur Active 002");
+			// this.props.setCurActive(this.props.selfPath, this.props.item.route);
 			// MenuAction.set_menu_item(this.props.selfPath, this.props.item.route);
 		}
 	},
@@ -24,7 +26,7 @@ var MenuItem = React.createClass({
 		}
 
 		return (
-			<li className={className}><Link to={"/" + this.props.item.route}>{this.props.item.name}</Link></li>
+			<li className={className} onClick={this.showRoute}><Link to={"/" + this.props.item.route}>{this.props.item.name}</Link></li>
 		);
 
 		// return (

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { receiveMenuData, setMemuPath, setMenuItem } from '../actions';
+import { receiveMenuData, setMemuPath, setMenuItem, fetchUser } from '../actions';
 import Header from './Header.react';
 import Footer from './Footer.react';
 import SideMenu from './menu/SideMenu.react';
@@ -11,13 +11,15 @@ var MyApp = React.createClass({
 		// this.setState({menuData: Constants.MENUDATA});
 		// this.unsubscribe = MenuStore.listen(this._onChange);
 		// MenuAction.receive_menu_data(Constants.MENUDATA);
+		this.props.dispatch(fetchUser('abc123'));
 		this.props.dispatch(receiveMenuData(Constants.MENUDATA));
 	},
 	componentWillUnmount: function() {
 		// this.unsubscribe();
 	},
 	render: function () {
-		const { dispatch, curPath, curActive, menuData } = this.props;
+		var today = new Date().toString();
+		const { dispatch, curPath, curActive, menuData, userData } = this.props;
 		function setCurPath (path) {
 			dispatch(setMemuPath(path));
 		}
@@ -37,7 +39,7 @@ var MyApp = React.createClass({
 					
 					{this.props.children}
 				</div>
-				<Footer />
+				<Footer today={today} />
 			</div>
 		);
 	},
@@ -48,16 +50,20 @@ var MyApp = React.createClass({
 
 MyApp.propTypes = {
 	menuData: PropTypes.array.isRequired,
+	userData: PropTypes.object.isRequired,
 	curPath: PropTypes.string.isRequired,
 	curActive: PropTypes.string.isRequired
 };
 
-function select(state) {
+function select(state, ownProps) {
 	console.log(state);
+	console.log(ownProps);
   return {
     menuData: state.menuData,
+    userData: state.userData,
     curPath: state.curActive.curPath,
-    curActive: state.curActive.curActive
+    curActive: state.curActive.curActive,
+    pathname: ownProps.location.pathname
   };
 }
 
