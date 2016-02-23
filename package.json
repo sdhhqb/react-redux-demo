@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --content-base .",
-    "build": "webpack",
+    "build": "webpack --optimize-minimize",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,6 +14,7 @@
   "author": "sss",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.13.4",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
