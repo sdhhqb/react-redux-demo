@@ -1,12 +1,5 @@
 var webpack = require("webpack");
-module.exports = {
-	plugins: [
-		// new webpack.DefinePlugin({
-		//   "process.env": {
-		//     NODE_ENV: JSON.stringify("production")
-		//   }
-		// })
-	],
+var = {
 	entry: './js/index.js',
 
 	output: {
@@ -19,5 +12,18 @@ module.exports = {
 		loaders: [
 			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?presets[]=es2015&presets[]=react' }
 		]
-	}
+	},
+
+	plugins: [],
 };
+var env = process.env.NODE_ENV;
+if (env === 'production') {
+	config.plugins.push(
+		new webpack.DefinePlugin({
+		  "process.env": {
+		    NODE_ENV: JSON.stringify("production")
+		  }
+		})
+	);
+}
+module.exports = config;
