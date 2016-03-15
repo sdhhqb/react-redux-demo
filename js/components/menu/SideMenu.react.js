@@ -13,6 +13,7 @@ var SideMenu = React.createClass({
 		const { dispatch } = this.props;
 
 		function setCurPath (path) {
+			console.log('set curpath');
 			dispatch(setMemuPath(path));
 		}
 		function setCurActive (path, item) {

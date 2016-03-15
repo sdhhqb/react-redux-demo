@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --content-base .",
-    "devbuild": "webpack --optimize-minimize",
+    "devbuild": "webpack",
     "build": "cross-env NODE_ENV=production webpack --optimize-minimize",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

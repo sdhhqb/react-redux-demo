@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 app.use(express.static('.'));
 
-var port = 8080;
+var port = 8081;
 
 app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html');

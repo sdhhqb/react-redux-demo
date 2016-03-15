@@ -1,5 +1,5 @@
 var webpack = require("webpack");
-var = {
+var config = {
 	entry: './js/index.js',
 
 	output: {

@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, hashHistory } from 'react-router'
 import { syncHistory, routeReducer } from 'react-router-redux';
@@ -19,13 +19,26 @@ const reducer = combineReducers(Object.assign({}, MyAppReducers, {
 }));
 // 添加中间件
 const reduxRouterMiddleware = syncHistory(hashHistory);
-const createStoreWithMiddleware = applyMiddleware(
-		thunkMiddleware,
-		loggerMiddleware,
-		reduxRouterMiddleware
-	)(createStore);
+// const createStoreWithMiddleware = applyMiddleware(
+// 		thunkMiddleware,
+// 		loggerMiddleware,
+// 		reduxRouterMiddleware
+// 	)(createStore);
 // 创建store
-var store = createStoreWithMiddleware(MyAppReducers);
+function configStore (initialState) {
+	var store = createStore(MyAppReducers, initialState, compose(
+		applyMiddleware(
+			thunkMiddleware,
+			loggerMiddleware,
+			reduxRouterMiddleware
+		),
+		window.devToolsExtension ? window.devToolsExtension() : f => f
+		)
+	);
+	return store;
+}
+var store = configStore();
+// var store = createStoreWithMiddleware(MyAppReducers);
 // touter配置
 var rootRoute = {
 	component: 'div',
