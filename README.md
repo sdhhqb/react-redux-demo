@@ -1,5 +1,6 @@
 # react-redux-demo
 react redux demo, a demonstration of build CMS with react + redux + react router.
+react redux demo, 演示用react+redux+react router来构建一个后台管理系统。
 
 ## 运行
 
